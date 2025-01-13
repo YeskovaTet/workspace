@@ -1,0 +1,8 @@
+>>> 10/24/2023 14:40:35:914
+TBT Coinstaller (17.4.80.94) I
+  Launching installer: msiexec.exe /i C:\Intel\Thunderbolt\setup.msi /qn NO_DRIVERS=TRUE /l*v tbt_log.txt
+  Installer launched successfully
+  Installer exit code: 0
+*Exiting*
+>>> 10/10/2024 14:20:22:898
+TBT Coinstaller (17.4.80.94) U
