@@ -1,0 +1,110 @@
+//Задача 1//
+// 1. Дан массив чисел [12, 5, 8, 130, 44].
+//  Создайте новый массив, содержащий только числа больше 10.
+
+let NumArr = [12, 5, 8, 130, 44]
+
+let Num10 = NumArr.filter(function(value){
+    if (value > 10){
+        return value
+    }
+})
+ 
+console.log(Num10); //12, 130, 44
+
+//Задача 2
+//// 2. Напишите программу, которая принимает массив строк и возвращает массив длин этих строк по возрастанию.
+// ["one", "three", "two"] -> [3, 5, 3] -> [3, 3, 5]
+
+let strArr = ["one", "three", "two"] 
+
+let sortLengthArr = strArr.map(function(str){
+  return str.length;
+}).sort(function(a, b){
+    return a - b;
+});
+
+console.log(sortLengthArr);
+
+//Задача 3//
+//3. Есть массив строк. Отсортируйте строки по их длине
+//  (от самой короткой к самой длинной) и выведите результат.
+// ['hello', 'world', 'javascript', 'code'] => ['code', 'hello', 'world', 'javascript']
+
+
+let UnsortedWords = ['hello', 'world', 'javascript', 'code']
+
+ UnsortedWords.sort(function(word_n, word_c){
+    return word_n.length - word_c.length
+ })
+
+console.log(UnsortedWords); ///'code', 'hello', 'world', 'javascript'.
+
+
+// 4. Подсчитайте количество гласных букв в строке. Выведите результат.
+// // let vowels = [a, e, i, o, u]
+// "hello" -> 2
+// "javascript" -> 3
+// "world" -> 1
+
+// let vowels = [a, e, i, o, u];
+
+// function countVowels(arr){
+//     let vowels = [a, e, i, o, u];
+//     return  arr.reduce(function( totalCount, str){
+//         let countInStr = str.split('').reduce(function( count, char){
+//             if (vowels.includes(char)){
+//                 return count + 1
+//             }else{
+//                 return count;
+//             }
+//         }, 0);
+//         return totalCount + countInStr;
+//     }, 0);
+// }
+//  console.log(countVowels("hello"));
+//  console.log(countVowels("javascript"));
+//  console.log(countVowels("world"));
+ 
+// 5. Дана строка. Отсортировать её символы в алфавитном порядке.
+// "javascript"-> "aacijprstv"
+// "hello" -> "ehllo"
+
+function sortString(str){
+    return str.split('').sort().join('');
+}
+
+console.log(sortString("javascript"));
+console.log(sortString("hello"));
+
+
+// 7. Дан массив чисел [2, 1, 4, 1, 5, 9]. Найдите сумму квадратов всех четных чисел.
+
+let numbers = [2, 5, 4, 3, 7, 1]
+
+function sumOfSquareOfEvens(arr){
+    return arr
+    .filter(function(num){
+        return num % 2 === 0;
+    })
+    .map(function(num){
+        return num * num ;
+    })
+    .reduce(function(count, num){
+        return count + num;
+    }, 0);
+}
+console.log(sumOfSquareOfEvens(numbers)); //20
+// 8. Дан массив чисел. Проверить, упорядочены ли элементы по возрастанию.
+// [1, 5, 9, 12, 36] => true
+// [1, 5, 12, 9, 36, -5] => false
+
+  function isSorted(arr){
+    return arr.every(function(num, index, array){
+        return index=== 0 || arr[index - 1] <= num;
+    });
+  }
+
+  console.log(isSorted([1, 5, 9, 12, 36]));
+  console.log(isSorted([1, 5, 12, 9, 36, -5]));
+  
