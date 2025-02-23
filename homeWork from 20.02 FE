@@ -1,0 +1,176 @@
+// 1. Создайте класс Car с свойствами mark (марка), model (модель) и year (год выпуска).
+//           Добавьте метод age(), который вычисляет возраст автомобиля (на основе текущего года).
+
+class Car {
+    constructor(mark, model, year) {
+        this.mark = mark
+        this.model = model
+        this.year = year
+    }
+    age() {
+        const currentYear = new Date().getFullYear();
+        return currentYear - this.year;
+    }
+}
+
+const myCar = new Car("BMW", "M5", 2020);
+console.log(myCar.age());
+
+
+// 2.Модифицируйте класс Person, добавив новое свойство email и метод change_email(newEmail),
+//         который меняет email только если новый email содержит символ "@" и ".", иначе выбрасывает исключение.
+
+
+class Person {
+    static roles = ["student", "lecturer", "employer"]
+
+    constructor(name, lastname, email) {
+        this.name = name
+        this.lastname = lastname
+        this.email = email
+    }
+    change_email(newEmail) {
+        if (newEmail.includes('@') && newEmail.includes('.')) {
+            this.email = newEmail ///??????????????????????????????????/
+            return "Email успешно изменен"
+        }
+        throw new Error("Неверный формат email")
+    }
+}
+
+const person = new Person("Tetyana", "Yeskova", "kejjsyngmail.com");
+console.log(person.email);
+
+person.change_email("kejjsella@example.com");
+console.log(person.email);
+
+// 3.Создайте класс Library, который хранит статический массив книг. Каждая книга – это объект с свойствами title
+//            и author. Добавьте статический метод addBook(book), который добавляет книгу в библиотеку, 
+//            и статический метод listBooks(), который выводит список книг в консоль.
+
+class Book {
+    constructor(title, author) {
+        this.title = title;
+        this.author = author;
+    }
+}
+class Library {
+    static books = [];
+
+    static addBook(book) {
+        Library.books.push(book)
+    }
+    static ListBooks() {
+        Library.books.forEach((book, index) => {
+            console.log(`${index + 1}. ${book.title} автор ${book.author}`);
+
+        });
+    }
+
+}
+
+const book1 = new Book("Война и Мир", "Лев Толстой")
+const book2 = new Book("Преступление и наказание", "Федор Достоевский")
+
+Library.addBook(book1)
+Library.addBook(book2)
+
+Library.ListBooks()
+
+
+// 4.Создайте класс Rectangle с приватными свойствами #width и #height. Реализуйте геттеры и сеттеры для этих свойств,
+//  чтобы ширина и высота могли устанавливаться только положительными числами. Добавьте метод area(),
+//   который возвращает площадь прямоугольника.
+
+class Rectangle {
+    #width;
+    #height;
+
+    constructor(wight, height) {
+        this.wight = wight;
+        this.height = height
+    }
+    get wight() {
+        return this.#width;
+    }
+    set wight(value) {
+        if (value > 0) {
+            this.#width = value
+        } else {
+            throw new Error('Ширина должна быть положительным числом');
+        }
+    }
+    get height() {
+        return this.#height;
+    }
+    set height(value) {
+        if (value > 0) {
+            this.#height = value;
+        } else {
+            throw new Error('Высота должна быть положительной');
+        }
+
+    }
+
+    area() {
+        return this.#height * this.#width;
+    }
+}
+const rect = new Rectangle(5, 19);
+console.log(rect.area());
+
+
+
+
+// 5.Создайте класс BankAccount с приватным свойством #balance. Реализуйте методы для депозита и снятия средств.
+//  Добавьте геттер для получения текущего баланса. При попытке снять сумму, большую чем баланс, выбрасывайте исключение. Затем создайте статический метод, который ведёт учёт всех созданных счетов (например, массив accounts)
+// и статический метод для расчёта общего баланса всех счетов.
+
+
+class BankAccount {
+    #balance;
+    static accounts = [];
+
+    constructor(initialBalance = 0) {
+        if (initialBalance < 0) {
+            throw new Error('Начальный баланс не может быть отрицательным.');
+        }
+        this.#balance = initialBalance;
+        BankAccount.accounts.push(this);
+    }
+
+    get balance() {
+        return this.#balance;
+    }
+
+    deposit(amount) {
+        if (amount > 0) {
+            this.#balance += amount;
+        } else {
+            throw new Error('Сумма депозита должна быть положительной.');
+        }
+    }
+
+    withdraw(amount) {
+        if (amount > this.#balance) {
+            throw new Error('Недостаточно средств на счёте.');
+        } else if (amount > 0) {
+            this.#balance -= amount;
+        } else {
+            throw new Error('Сумма снятия должна быть положительной.');
+        }
+    }
+
+    static getTotalBalance() {
+        return BankAccount.accounts.reduce((total, account) => total + account.balance, 0);
+    }
+}
+
+// Пример использования класса BankAccount
+const account1 = new BankAccount(156);
+const account2 = new BankAccount(245);
+account1.deposit(50);
+account2.withdraw(100);
+console.log('Баланс аккаунта 1:', account1.balance);
+console.log('Баланс аккаунта 2:', account2.balance);
+console.log('Общий баланс всех счетов:', BankAccount.getTotalBalance());
